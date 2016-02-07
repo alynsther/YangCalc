@@ -12,11 +12,14 @@ class ViewController: UIViewController {
 
     var userIsInTheMiddleOfTypingANumber: Bool = false
     var decimalWasPressed: Bool = false
+    var piWasPressed: Bool = false
     var brain = CalculatorBrain()
     let x = M_PI // pi functiong
     
     @IBOutlet weak var display: UILabel!
 
+    @IBOutlet weak var history: UILabel!
+    
     @IBAction func digitPressed(sender: UIButton) {
         let digit = sender.currentTitle!
         
@@ -36,6 +39,7 @@ class ViewController: UIViewController {
             enter()
         }
         if let operation = sender.currentTitle {
+            updateHistory("\(operation)")
             if let result = brain.performOperation(operation) {
                 displayValue = result
             } else {
@@ -52,24 +56,48 @@ class ViewController: UIViewController {
         } else {
             displayValue = 0
         }
+        
+        if piWasPressed {
+            updateHistory("∏")
+        } else {
+            updateHistory("\(displayValue)")
+        }
+        
+    }
+    
+    func updateHistory(value: String) {
+//        if history.text == "0" {
+//            history.text = "0"
+//        } else {
+            history.text = history.text! + " " + value
+//        }
     }
 
 
     @IBAction func piPressed() {
         userIsInTheMiddleOfTypingANumber = true
-        if display.text != "0" {
-            enter()
-        }
+        piWasPressed = true
         display.text = "\(x)"
         enter()
+        piWasPressed = false
     }
     
     @IBAction func decimalPressed() {
         userIsInTheMiddleOfTypingANumber = true
-        if !decimalWasPressed {
+        if decimalWasPressed == false {
             display.text = display.text! + "."
             decimalWasPressed = true
         }
+    }
+    
+    
+    @IBAction func clear() {
+        userIsInTheMiddleOfTypingANumber = false
+        decimalWasPressed = false
+        brain.clearBrain()
+        display.text = "0"
+        history.text = ""
+        
     }
     
     var displayValue: Double {
@@ -81,31 +109,6 @@ class ViewController: UIViewController {
             userIsInTheMiddleOfTypingANumber = false
         }
     }
-    
-    @IBAction func clear() {
-        userIsInTheMiddleOfTypingANumber = false
-        brain.clearBrain()
-        display.text = "0"
-        enter()
-        
-    }
-    //Chown suggests that this should be removed
-    //kept it because wanted the background to be black
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        // Do any additional setup after loading the view, typically from a nib.
-//        self.view.backgroundColor = UIColor.blackColor()
-//    }
-    
-    //Chown suggests that this should be removed
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
-
-    
-
 
 }
 
