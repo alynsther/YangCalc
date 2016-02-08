@@ -6,13 +6,21 @@
 //  Copyright © 2016 edu.bowdoin.cs3400.ayang. All rights reserved.
 //
 
+
+/*****************************************************************************
+Description: This program implements a basic calculator that has the stardard
+operations along with sin, cos, sqrt, pi, clear, decimal and a history.
+******************************************************************************/
+
 import UIKit
 
 class ViewController: UIViewController {
 
+    /***************************************************************************/
+    /* global variables */
     var userIsInTheMiddleOfTypingANumber: Bool = false
     var decimalWasPressed: Bool = false
-    var piWasPressed: Bool = false
+    var piWasPressed = 0
     var brain = CalculatorBrain()
     let x = M_PI // pi functiong
     
@@ -20,6 +28,12 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var history: UILabel!
     
+    /***************************************************************************
+     Function:  digitPressed
+     Inputs:    button pressed
+     Returns:   none
+     Description: records the digit being pressed and displays it
+     ***************************************************************************/
     @IBAction func digitPressed(sender: UIButton) {
         let digit = sender.currentTitle!
         
@@ -29,59 +43,75 @@ class ViewController: UIViewController {
             display.text = digit
             userIsInTheMiddleOfTypingANumber = true
         }
-        
-//        print("The digit pressed was \(display.text)")
-        
     }
 
+    /***************************************************************************
+     Function:  operate
+     Inputs:    button pressed
+     Returns:   none
+     Description: updates the operation to the history and calculates the answer
+     ***************************************************************************/
     @IBAction func operate(sender: UIButton) {
         if userIsInTheMiddleOfTypingANumber {
             enter()
         }
+        
         if let operation = sender.currentTitle {
             updateHistory("\(operation)")
+            
             if let result = brain.performOperation(operation) {
                 displayValue = result
+                updateHistory("\(displayValue)")
             } else {
                 displayValue = 0
             }
         }
     }
     
+    /***************************************************************************
+     Function: enter
+     Inputs:   none
+     Returns:  none
+     Description: updates the history adds the thing to the stack
+     ***************************************************************************/
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
         decimalWasPressed = false
+        
         if let result = brain.pushOperand(displayValue) {
             displayValue = result
         } else {
             displayValue = 0
         }
         
-        if piWasPressed {
+        if piWasPressed > 0 {
             updateHistory("∏")
+            piWasPressed--
         } else {
             updateHistory("\(displayValue)")
         }
-        
     }
     
-    func updateHistory(value: String) {
-//        if history.text == "0" {
-//            history.text = "0"
-//        } else {
-            history.text = history.text! + " " + value
-//        }
-    }
-
-
+    /***************************************************************************
+     Function:  piPressed
+     Inputs:    none
+     Returns:   none
+     Description: updates the history and display value to pi
+     ***************************************************************************/
     @IBAction func piPressed() {
-        userIsInTheMiddleOfTypingANumber = true
-        piWasPressed = true
-        display.text = "\(x)"
         enter()
-        piWasPressed = false
+        piWasPressed = 1
+        displayValue = x
+        enter()
+        piWasPressed = 0
     }
     
+    /***************************************************************************
+     Function:  decimalPressed
+     Inputs:    none
+     Returns:   none
+     Description: updates the display of a floating number
+     ***************************************************************************/
     @IBAction func decimalPressed() {
         userIsInTheMiddleOfTypingANumber = true
         if decimalWasPressed == false {
@@ -90,16 +120,41 @@ class ViewController: UIViewController {
         }
     }
     
-    
+    /***************************************************************************
+     Function:  clear
+     Inputs:    none
+     Returns:   none
+     Description: clears the history and display
+     ***************************************************************************/
     @IBAction func clear() {
         userIsInTheMiddleOfTypingANumber = false
         decimalWasPressed = false
-        brain.clearBrain()
-        display.text = "0"
+        piWasPressed = 0
+        displayValue = 0
         history.text = ""
-        
+        brain.clearBrain()
     }
     
+    
+    /***************************************************************************/
+     /* utility functions */
+    
+    /***************************************************************************
+     Function:  updateHistory
+     Inputs:    String
+     Returns:   none
+     Description: displays the history
+     ***************************************************************************/
+    func updateHistory(value: String) {
+        history.text = history.text! + " " + value
+    }
+
+    /***************************************************************************
+     Function:  displayValue
+     Inputs:    Double
+     Returns:   none
+     Description: displays the value
+     ***************************************************************************/
     var displayValue: Double {
         get {
             return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
@@ -110,5 +165,8 @@ class ViewController: UIViewController {
         }
     }
 
-}
+    
+    
+} // end class
 
+/****** END OF FILE ********************************************************/
