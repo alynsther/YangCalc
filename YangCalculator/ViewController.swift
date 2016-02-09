@@ -61,7 +61,6 @@ class ViewController: UIViewController {
             
             if let result = brain.performOperation(operation) {
                 displayValue = result
-                updateHistory("\(displayValue)")
             } else {
                 displayValue = 0
             }
@@ -90,6 +89,7 @@ class ViewController: UIViewController {
         } else {
             updateHistory("\(displayValue)")
         }
+        
     }
     
     /***************************************************************************
