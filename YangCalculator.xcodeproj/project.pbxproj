@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E54EE57F1C92097900F2BA5D /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54EE57E1C92097900F2BA5D /* AxesDrawer.swift */; };
 		E59DEFCE1C6579B200070674 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59DEFCD1C6579B200070674 /* AppDelegate.swift */; };
 		E59DEFD01C6579B200070674 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59DEFCF1C6579B200070674 /* CalculatorViewController.swift */; };
 		E59DEFD31C6579B200070674 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E59DEFD11C6579B200070674 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E54EE57E1C92097900F2BA5D /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
 		E59DEFCA1C6579B200070674 /* YangCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YangCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59DEFCD1C6579B200070674 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E59DEFCF1C6579B200070674 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				E5B8E4FC1C6587E700C3DEE9 /* CalculatorBrain.swift */,
+				E54EE57E1C92097900F2BA5D /* AxesDrawer.swift */,
 				E59DEFCD1C6579B200070674 /* AppDelegate.swift */,
 				E59DEFCF1C6579B200070674 /* CalculatorViewController.swift */,
 				E59DEFD11C6579B200070674 /* Main.storyboard */,
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5B8E4FD1C6587E700C3DEE9 /* CalculatorBrain.swift in Sources */,
+				E54EE57F1C92097900F2BA5D /* AxesDrawer.swift in Sources */,
 				E59DEFD01C6579B200070674 /* CalculatorViewController.swift in Sources */,
 				E59DEFCE1C6579B200070674 /* AppDelegate.swift in Sources */,
 			);
