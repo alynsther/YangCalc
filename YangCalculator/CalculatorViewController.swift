@@ -14,7 +14,7 @@ operations along with sin, cos, sqrt, pi, clear, decimal and a history.
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
 
     /***************************************************************************/
     /* global variables */
