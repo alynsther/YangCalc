@@ -18,18 +18,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B0t-gS-R54" customClass="GraphView" customModule="YangCalculator" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0t-gS-R54" customClass="GraphView" customModule="YangCalculator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Dr-vg-o43" customClass="GraphView" customModule="YangCalculator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="1Dr-vg-o43" firstAttribute="top" secondItem="B0t-gS-R54" secondAttribute="top" id="41q-JC-g00"/>
+                                    <constraint firstItem="1Dr-vg-o43" firstAttribute="leading" secondItem="B0t-gS-R54" secondAttribute="leading" id="dF6-E4-mT4"/>
+                                    <constraint firstAttribute="bottom" secondItem="1Dr-vg-o43" secondAttribute="bottom" id="oWB-NG-kFw"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Dr-vg-o43" secondAttribute="trailing" id="rEU-Nu-J6e"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="B0t-gS-R54" secondAttribute="trailing" id="Y1h-Ex-U9W"/>
+                            <constraint firstItem="B0t-gS-R54" firstAttribute="leading" secondItem="3x9-AD-Cua" secondAttribute="leading" id="bWp-yi-gUj"/>
+                            <constraint firstItem="B0t-gS-R54" firstAttribute="bottom" secondItem="Tzq-WT-9a1" secondAttribute="top" id="nHa-hP-4OO"/>
+                            <constraint firstItem="B0t-gS-R54" firstAttribute="top" secondItem="3x9-AD-Cua" secondAttribute="top" id="ofm-BL-T4I"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Tws-wn-msy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oer-6n-bxf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-376" y="-395"/>
+            <point key="canvasLocation" x="436" y="-395"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qZ8-Ag-TlP">
@@ -53,7 +71,7 @@
                 <splitViewController id="di3-mM-WuS" sceneMemberID="viewController">
                     <connections>
                         <segue destination="QTN-Tp-SE4" kind="relationship" relationship="masterViewController" id="SCP-b4-spb"/>
-                        <segue destination="OC4-SD-bHj" kind="relationship" relationship="detailViewController" id="XCX-o2-Aq9"/>
+                        <segue destination="Tel-vg-fLP" kind="relationship" relationship="detailViewController" id="XCX-o2-Aq9"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zSR-sE-e1g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -245,7 +263,7 @@
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.80256647380000001" blue="0.1408247863" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="G"/>
                                 <connections>
-                                    <segue destination="OC4-SD-bHj" kind="showDetail" id="K7S-rs-ngC"/>
+                                    <segue destination="Tel-vg-fLP" kind="showDetail" id="K7S-rs-ngC"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FT5-sH-WFS">
@@ -414,6 +432,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="434" y="-1143"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DYV-Ik-O5M">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tel-vg-fLP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DpC-bk-pj8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OC4-SD-bHj" kind="relationship" relationship="rootViewController" id="Wo9-bd-nFf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6QE-ZI-BzN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-376" y="-395"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
