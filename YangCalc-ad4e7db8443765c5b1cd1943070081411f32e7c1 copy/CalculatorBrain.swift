@@ -15,6 +15,8 @@ class CalculatorBrain
     private var opStack = [Op]()
     private var knownOps = [String: Op]()
     private var variableValues = [String: Double]()
+    
+    typealias PropertyList = AnyObject
 
     /***************************************************************************/
      /* different types of operand and operations */
@@ -63,7 +65,11 @@ class CalculatorBrain
                     else if let operand = NSNumberFormatter().numberFromString(opSymbol)?.doubleValue {
                         newOpStack.append(.Operand(operand))
                     }
+                    else {
+                        newOpStack.append(.Variable(opSymbol))
+                    }
                 }
+                opStack = newOpStack
             }
         }
     }
@@ -139,8 +145,9 @@ class CalculatorBrain
      Description: evaluates the stack
      ***************************************************************************/
     func evaluate() -> Double? {
-        let (result, _) = evaluate(opStack)
-        return result
+//        let (result, _) = evaluate(opStack)
+//        return result
+        return evaluate(opStack).result
     }
     
     /***************************************************************************
@@ -213,7 +220,8 @@ class CalculatorBrain
     ***************************************************************************/
     func setVariable(symbol: String, value: Double) -> Double? {
         variableValues[symbol] = value
-        return evaluate()
+        let result = evaluate()
+        return result
     }
     
     /***************************************************************************

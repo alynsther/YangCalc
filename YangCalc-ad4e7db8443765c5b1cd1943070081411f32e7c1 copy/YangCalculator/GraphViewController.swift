@@ -24,19 +24,15 @@ class GraphViewController: UIViewController, GraphViewDataSource {
         }
     }
     
-    private var brain = CalculatorBrain()
-    
     //compute the value of output given an input
     func functionValueFromPointX(x: CGFloat) -> CGFloat? {
-//        print(x)
         if let y = brain.setVariable("M", value: Double(x)) {
-            print("y", y)
             return CGFloat(y)
         }
         return nil
     }
     
-
+    private var brain = CalculatorBrain()
     
     typealias PropertyList = AnyObject
     

@@ -238,13 +238,11 @@ class CalculatorViewController: UIViewController {
             destination = navCon.visibleViewController!
         }
         if let gvc = destination as? GraphViewController {
-            print("enter1")
             if let identifier = segue.identifier {
                 switch identifier {
                 case "graph":
                     gvc.title = brain.description == "" ? "Graph" : brain.description.componentsSeparatedByString(", ").last
                     gvc.program = brain.program
-                    print("enter segue")
                 default:
                     break
                 }

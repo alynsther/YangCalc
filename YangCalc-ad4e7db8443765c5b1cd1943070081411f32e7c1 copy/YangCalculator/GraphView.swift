@@ -111,22 +111,17 @@ class GraphView: UIView {
             if (dataSource == nil) {
                 print("data source is nil")
             }
+            
             let x = point.x - origin.x
-            
-            //i added this in
-//            let y = dataSource!.functionValueFromPointX(x)
-//            print(y)
-            
-//            print("enter dataSource")
             if let y = dataSource!.functionValueFromPointX(x / scale) {
-        
-                print("value of \(x) is \(y)")
+//                print("value of \(x) is \(y)")
+                
                 if !y.isNormal && !y.isZero {
                     firstValue = true
                     continue
                 }
                 point.y = origin.y - y * scale
-                point.y = 2
+                
                 if firstValue {
                     graph.moveToPoint(point)
                     graph.stroke()
