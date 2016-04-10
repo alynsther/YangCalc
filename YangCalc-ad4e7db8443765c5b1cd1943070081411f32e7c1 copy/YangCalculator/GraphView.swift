@@ -117,15 +117,16 @@ class GraphView: UIView {
 //            let y = dataSource!.functionValueFromPointX(x)
 //            print(y)
             
-//            if let y = dataSource!.functionValueFromPointX(x / scale) {
+//            print("enter dataSource")
+            if let y = dataSource!.functionValueFromPointX(x / scale) {
         
-//                print("value of \(x) is \(y)")
-//                if !y.isNormal && !y.isZero {
+                print("value of \(x) is \(y)")
+                if !y.isNormal && !y.isZero {
                     firstValue = true
-//                    continue
-//                }
-//                point.y = origin.y - y * scale
-            point.y = 2
+                    continue
+                }
+                point.y = origin.y - y * scale
+                point.y = 2
                 if firstValue {
                     graph.moveToPoint(point)
                     graph.stroke()
@@ -135,7 +136,7 @@ class GraphView: UIView {
                     graph.addLineToPoint(point)
                     graph.stroke()
                 }
-//            }
+            }
         }
     }
     
