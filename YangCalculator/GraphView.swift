@@ -17,7 +17,7 @@
 import UIKit
 
 protocol GraphViewDataSource: class {
-    func functionValueFromPointX(x: CGFloat) -> CGFloat?
+    func valueForGraphView(x: CGFloat) -> CGFloat?
 }
 
 @IBDesignable
@@ -71,7 +71,7 @@ class GraphView: UIView {
     }
     
     //takes care of pan gesture
-    func moveGraph (gesture: UIPanGestureRecognizer) {
+    func move (gesture: UIPanGestureRecognizer) {
         print("entering pan")
         switch gesture.state {
         case .Ended: fallthrough
@@ -89,7 +89,7 @@ class GraphView: UIView {
     }
     
     //takes care of tap gesture
-    func tapCenter (gesture: UITapGestureRecognizer) {
+    func tap (gesture: UITapGestureRecognizer) {
         print("entering tap")
         if gesture.state == .Ended {
             origin = gesture.locationInView(self)
@@ -118,10 +118,10 @@ class GraphView: UIView {
             point.x = CGFloat(i) / contentScaleFactor
             if (dataSource == nil) {
                 print("data source is nil")
-//                dataSource?.functionValueFromPointX(point.x) ?? float
+//                dataSource?.valueForGraphView(point.x) ?? float
             }
             let x = point.x - origin.x
-            if let y = dataSource?.functionValueFromPointX(x / scale) {
+            if let y = dataSource?.valueForGraphView(x / scale) {
                 print("value of \(x) is \(y)")
                 if !y.isNormal && !y.isZero {
                     firstValue = true
