@@ -96,7 +96,7 @@ class GraphView: UIView {
         }
         
         //draw the two axis centered in the UIView
-        AxesDrawer(color: UIColor.blackColor(), contentScaleFactor: scale).drawAxesInRect(bounds, origin: origin, pointsPerUnit: scale)
+        AxesDrawer(color: UIColor.whiteColor(), contentScaleFactor: scale).drawAxesInRect(bounds, origin: origin, pointsPerUnit: scale)
         
         color.set()
         

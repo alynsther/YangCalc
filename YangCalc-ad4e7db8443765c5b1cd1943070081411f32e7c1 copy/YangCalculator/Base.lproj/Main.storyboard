@@ -17,7 +17,7 @@
                     <view key="view" contentMode="scaleToFill" id="U1y-y5-aIJ" customClass="GraphView" customModule="YangCalculator" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="3NM-zu-kXJ" appends="YES" id="7wf-ZY-IsM"/>
