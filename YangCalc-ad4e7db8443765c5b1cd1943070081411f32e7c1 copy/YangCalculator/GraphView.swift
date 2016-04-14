@@ -23,21 +23,6 @@ class GraphView: UIView {
         }
     }
     
-    private var origin: CGPoint = CGPoint() {
-        didSet {
-            resetOrigin = false
-            setNeedsDisplay()
-        }
-    }
-    
-    private var resetOrigin: Bool = true {
-        didSet {
-            if resetOrigin {
-                setNeedsDisplay()
-            }
-        }
-    }
-    
     @IBInspectable var lineWidth: CGFloat = 2 {
         didSet {
             setNeedsDisplay()
@@ -50,7 +35,52 @@ class GraphView: UIView {
         }
     }
     
-    //takes care of pinch gesture
+    /***************************************************************************
+     Function:  origin
+     Inputs:    CGFloat
+     Returns:   none
+     Description: initialize an origin
+     ***************************************************************************/
+    private var origin: CGPoint = CGPoint() {
+        didSet {
+            resetOrigin = false
+            setNeedsDisplay()
+        }
+    }
+    
+    /***************************************************************************
+     Function:  resetOrigin
+     Inputs:    CGFloat
+     Returns:   none
+     Description: reset origin given tap gesture
+     ***************************************************************************/
+    private var resetOrigin: Bool = true {
+        didSet {
+            if resetOrigin {
+                setNeedsDisplay()
+            }
+        }
+    }
+    
+    /***************************************************************************
+     Function:  Constants
+     Inputs:    none
+     Returns:   none
+     Description: define the graph gesture scale
+     ***************************************************************************/
+    private struct Constants {
+        static let GraphGestureScale: CGFloat = 2
+    }
+    
+    
+    //MARK: Gestures
+    
+    /***************************************************************************
+    Function:  scale
+    Inputs:    gesture
+    Returns:   none
+    Description: readjust screen given the scale
+    ***************************************************************************/
     func scale (gesture: UIPinchGestureRecognizer) {
         if gesture.state == .Changed {
             scale *= gesture.scale
@@ -58,51 +88,61 @@ class GraphView: UIView {
         }
     }
     
-    private struct Constants {
-        static let GraphGestureScale: CGFloat = 2
-    }
-    
-    //takes care of pan gesture
+    /***************************************************************************
+     Function:  move
+     Inputs:    gesture
+     Returns:   none
+     Description: recalculate the x and y values of the gesture
+     ***************************************************************************/
     func move (gesture: UIPanGestureRecognizer) {
-        print("entering pan")
         switch gesture.state {
         case .Ended: fallthrough
         case .Changed:
             let translation = gesture.translationInView(self)
-            let xChange = translation.x / Constants.GraphGestureScale
-            let yChange = translation.y / Constants.GraphGestureScale
-            if (yChange * xChange) != 0 {
-                origin.x += xChange
-                origin.y += yChange
+            let xTemp = translation.x / Constants.GraphGestureScale
+            let yTemp = translation.y / Constants.GraphGestureScale
+            if (yTemp * xTemp) != 0 {
+                origin.x += xTemp
+                origin.y += yTemp
                 gesture.setTranslation(CGPointZero, inView: self)
             }
         default: break
         }
     }
     
+    /***************************************************************************
+     Function:  center
+     Inputs:    gesture
+     Returns:   none
+     Description: recalibrate the origin
+     ***************************************************************************/
     //takes care of tap gesture
     func center (gesture: UITapGestureRecognizer) {
-        print("entering tap")
         if gesture.state == .Ended {
             origin = gesture.locationInView(self)
         }
     }
     
+    /***************************************************************************
+     Function:  xForGraphView
+     Inputs:    CGFloat
+     Returns:   none
+     Description: compute y value given x
+     ***************************************************************************/
     override func drawRect(rect: CGRect) {
-        
-        //auto adjust the origin to be the center if someone has already reset the origin
+        //readjust the origin is reset by tap
         if resetOrigin {
             origin = center
         }
         
-        //draw the two axis centered in the UIView
+        //initializes axes
         AxesDrawer(color: UIColor.whiteColor(), contentScaleFactor: scale).drawAxesInRect(bounds, origin: origin, pointsPerUnit: scale)
         
         color.set()
         
-        let graph = UIBezierPath()
-        graph.lineWidth = lineWidth
-        var firstValue = true
+        let function = UIBezierPath()
+        function.lineWidth = lineWidth
+        var start = true
         var point = CGPoint()
         
         //iterating through every pixel on the graphView
@@ -114,22 +154,21 @@ class GraphView: UIView {
             
             let x = point.x - origin.x
             if let y = dataSource!.xForGraphView(x / scale) {
-//                print("value of \(x) is \(y)")
                 
                 if !y.isNormal && !y.isZero {
-                    firstValue = true
+                    start = true
                     continue
                 }
                 point.y = origin.y - y * scale
                 
-                if firstValue {
-                    graph.moveToPoint(point)
-                    graph.stroke()
-                    firstValue = false
+                if start {
+                    function.moveToPoint(point)
+                    function.stroke()
+                    start = false
                 }
                 else {
-                    graph.addLineToPoint(point)
-                    graph.stroke()
+                    function.addLineToPoint(point)
+                    function.stroke()
                 }
             }
         }

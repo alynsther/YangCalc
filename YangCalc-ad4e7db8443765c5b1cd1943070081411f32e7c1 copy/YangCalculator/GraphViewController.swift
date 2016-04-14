@@ -11,7 +11,12 @@ import UIKit
 @IBDesignable
 class GraphViewController: UIViewController, GraphViewDataSource {
     
-    //instance of GraphView class
+    /***************************************************************************
+     Function:  graphView
+     Inputs:    none
+     Returns:   none
+     Description: initialize an instance of the graphView class
+     ***************************************************************************/
     @IBOutlet weak var graphView: GraphView! {
         didSet {
             graphView.dataSource = self
@@ -23,7 +28,12 @@ class GraphViewController: UIViewController, GraphViewDataSource {
         }
     }
     
-    //compute the value of output given an input
+    /***************************************************************************
+     Function:  xForGraphView
+     Inputs:    CGFloat
+     Returns:   none
+     Description: compute y value given x
+     ***************************************************************************/
     func xForGraphView(x: CGFloat) -> CGFloat? {
         if let y = brain.setVariable("M", value: Double(x)) {
             return CGFloat(y)
@@ -44,6 +54,12 @@ class GraphViewController: UIViewController, GraphViewDataSource {
         }
     }
     
+    /***************************************************************************
+     Function:  updateUI
+     Inputs:    none
+     Returns:   none
+     Description: update the title to display the function being graphed
+     ***************************************************************************/
     func updateUI(){
         graphView?.setNeedsDisplay()
         title = "\(brain.description)"
