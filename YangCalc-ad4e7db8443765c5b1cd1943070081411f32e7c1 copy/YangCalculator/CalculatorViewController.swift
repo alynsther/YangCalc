@@ -231,7 +231,12 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    //transfer information through the segue to GraphView
+    /***************************************************************************
+     Function:  prepareForSegue
+     Inputs:    segue, sender
+     Returns:   none
+     Description: transfers information through the segue to GraphView
+     ***************************************************************************/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var destination = segue.destinationViewController
         if let navCon = destination as? UINavigationController {

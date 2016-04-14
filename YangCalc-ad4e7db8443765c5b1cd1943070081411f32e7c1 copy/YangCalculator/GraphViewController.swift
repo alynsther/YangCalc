@@ -6,7 +6,6 @@
 //  Copyright © 2016 edu.bowdoin.cs3400.ayang. All rights reserved.
 //
 
-
 import UIKit
 
 @IBDesignable
@@ -17,15 +16,15 @@ class GraphViewController: UIViewController, GraphViewDataSource {
         didSet {
             graphView.dataSource = self
             graphView.addGestureRecognizer(UIPinchGestureRecognizer(target: graphView, action: "scale:"))
-            graphView.addGestureRecognizer(UIPanGestureRecognizer(target: graphView, action: "moveGraph:"))
-            let tapNumber = UITapGestureRecognizer(target: graphView, action: "tapCenter:")
+            graphView.addGestureRecognizer(UIPanGestureRecognizer(target: graphView, action: "move:"))
+            let tapNumber = UITapGestureRecognizer(target: graphView, action: "center:")
             tapNumber.numberOfTapsRequired = 2;
             graphView.addGestureRecognizer(tapNumber)
         }
     }
     
     //compute the value of output given an input
-    func functionValueFromPointX(x: CGFloat) -> CGFloat? {
+    func xForGraphView(x: CGFloat) -> CGFloat? {
         if let y = brain.setVariable("M", value: Double(x)) {
             return CGFloat(y)
         }
